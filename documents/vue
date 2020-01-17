@@ -1,1 +1,59 @@
-Vue
+一、简介
+1.Vue是渐进式框架，即可将vue作为应用的一部分嵌入，带来更丰富的交互体验；或将更多的业务逻辑使用Vue实现，泽科使用Vue的核心库及其生态系统
+2.引入安装
+  （1）CDN引入
+    <!-- 开发环境版本，包含了有帮助的命令行警告 --> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 生产环境版本，优化了尺寸和速度 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  （2）下载引入
+    开发环境 https://vuejs.org/js/vue.js
+    生产环境 https://vuejs.org/js/vue.min.js
+  （3）npm安装
+二、量化
+三、正文
+1.vue中的MVVM：
+  ·View层：--视图层，通常是DOM层，主要作用是给用户展示各种信息
+  ·Model层：--数据层，可能是固定的死数据，更多的是请求下来的数据
+  ·ViewModel层：--视图模型层，view和model沟通的桥梁，一方面实现数据绑定，将Model层的改变实时反映到View层，另一方面实现DOM监听
+ 2.vue的生命周期：
+  new Vue() --> beforeCreate() --> created() --> beforeMount() --> mounted() --> beforeUpdate() --> updated() --> beforeDestory() --> destroyed()
+ 3.基础语法：
+  · Mustache：双大括号插值
+  · v-once：只渲染一次，不随数据改变而改变
+  · v-html：显示HTML片段
+  · v-text：展示数据，通常接收一个string类型
+  · v-pre：将代码原封不动的解析出来不作处理
+  · v-cloak：
+  · v-bind：动态绑定属性
+  · v-on：事件监听
+    *** 事件修饰符
+    * .stop--调用event.stopPropagation()
+    * .prevent --调用event.preventDefault()
+    * .{keycode | keyAlias} --特定键触发调用
+    * .native -- 监听组件根元素原生事件
+    * .once -- 只触发一次调用
+    ***
+  · v-if、v-else-if、v-show：
+    *** v-if和v-show的区别
+    * v-if动态向DOM树添加或删除元素，v-if通过display控制是否显示
+    * v-if是惰性的，当第一次条件为假则什么都不做
+    * v-if有更大的切换开销，v-show有更高的渲染开销
+    ***
+  · v-for：循环
+  · v-model：表单绑定
+    *** 修饰符
+    * v-model.lazy--默认同步改变，lazy可让数据在失去焦点或回车时更新
+    * v-model.number--自动转换为数字类型
+    * v-model.trim--去除左右两边的空格
+    ***
+    
+    
+  
+  
+  
+  
+ ***
+ * computed区别于method：
+ *    computed是属性调用，methods是函数调用
+ *    computed带有缓存功能，methods不具有
