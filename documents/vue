@@ -11,7 +11,7 @@
     生产环境 https://vuejs.org/js/vue.min.js
   （3）npm安装
 二、量化
-三、正文
+三、POINTS
 1.vue中的MVVM：
   ·View层：--视图层，通常是DOM层，主要作用是给用户展示各种信息
   ·Model层：--数据层，可能是固定的死数据，更多的是请求下来的数据
@@ -47,9 +47,42 @@
     * v-model.number--自动转换为数字类型
     * v-model.trim--去除左右两边的空格
     ***
-    
-    
-  
+4.组件化开发
+  · 注册组件：
+      --创建组件构造器：调用Vue.extend()
+      --注册组件：调用Vue.component()
+      --使用组件：在Vue示例的作用范围内使用
+  · 父子组件通信：
+    --$children：
+      --父组件调用子组件使用$children或$refs
+      --子组件访问父组件使用$parent
+      --$children的缺陷：
+        --通过$children访问子组件时，是一个数组类型，访问其中的子组件须通过索引值
+        --子组件过多，要拿其中一个时，往往不能确定其索引值，甚至会发生变化
+    --$refs：通过ref指令给子组件一个特定ID，父组件通过this.$refs.ID即可访问
+    --props：父组件引用子组件然后传参给子组件。子组件在props中接收父组件传递的数据
+        <children :username='name'></children> //父组件
+        props:[username]  // 子组件接收并可直接使用username，也可进行validator校验
+    --$parents：子组件中直接访问父组件(避免使用$parent访问父组件，耦合度高，不利于调试和维护)
+    --$emit：子父组件通信
+      --子组件通过$emit向父组件传递，参数1位事件名称，参数2位传递的数据(可选)
+      --父组件通过监听同样的事件名，抛出的值通过$event或通过一个方法访问
+        // 父组件
+        <children :content='content' @getNum='getMsg'></children>
+        getMsg(num){this.num=num}
+        // 子组件
+        <button @click='sendMsgToPar'>click</button>
+        props:['content'],
+        sendMsgToPar(){
+          this.$emit('getNum',this.num++)
+        }
+  · 非父子组件通信：调用公用Vue实例
+  · 插槽slot：默认插槽、具名插槽、作用域插槽
+5.Vue生命周期：
+  创建前/后：创建前 $el和data均为undefined，还未实例化；创建后化data有了，$el还没有
+  载入前/后：载入前，data和$el都实例化了，但是挂载之前为虚拟dom节点，data还未替换；载入后：vue实例化挂载完成，data渲染成功
+  更新前/后：data变化时，触发beforeUpdate和updated
+  销毁前/后：执行destroy之后，data的改变不会触发周期幻术，此时vue实例已解除事件监听和dom绑定，但是dom存在
   
   
   
